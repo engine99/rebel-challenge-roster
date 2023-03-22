@@ -18,7 +18,6 @@ Your minimum application requirements include:
 - Adding a field to toggle (and persist) whether the artist payout is complete (eg: checkbox)
 - Display is sorted in descending order by payout amount
 
-
 ## Dev notes:
 Electing to use a Node runtime to intermediate between a web client and a nosql database.
 
@@ -53,7 +52,11 @@ Styling? Minimalistic. Black and white. Great big curly numbers, why not.
 
 Accessibility: Always
 
-Copyright? Private, why not
+License? Copyrighted and unlicensed, why not
+
+Error pages? Standard. Embed error messages when running in dev env
+
+Containerization? No
 
 Q: What does CRUD for artists and rates mean exactly? An artist is an object and a rate is a field. Let's suppose, as a baseline, we can create
 and update artists given a well-formed Artist, and can read all or by url-encoded Artist name, or delete by url-encoded Artist name.
