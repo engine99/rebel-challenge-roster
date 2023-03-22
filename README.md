@@ -18,6 +18,12 @@ Your minimum application requirements include:
 - Adding a field to toggle (and persist) whether the artist payout is complete (eg: checkbox)
 - Display is sorted in descending order by payout amount
 
+
+## Focus
+- Complete solution
+- Try out jss
+
+
 ## Dev notes:
 Electing to use a Node runtime to intermediate between a web client and a nosql database.
 
@@ -58,8 +64,25 @@ Error pages? Standard. Embed error messages when running in dev env
 
 Containerization? No
 
-Q: What does CRUD for artists and rates mean exactly? An artist is an object and a rate is a field. Let's suppose, as a baseline, we can create
-and update artists given a well-formed Artist, and can read all or by url-encoded Artist name, or delete by url-encoded Artist name.
+Q: What does 'CRUD for artists and rates' mean exactly? An artist is an object and a rate is a field.
+For simplicity, as a baseline, let's provide Artist-level REST API only. So:
+
+Operation                       |      Payload     |   Response
+--------------------------------+------------------+------------------
+POST   /artists                 | None             |   Artist initialized to defaults, if successful
+                                                        409 if already exists
+                                                        400 if malformed payload
+PUT    /artists/Mariah%20Carey  | Artist object    |   Artist, if sucessful
+                                                        404 if DNE
+                                                        400 if malformed
+DELETE /artists/Mariah%20Carey  | Artist object    |   Artist, if sucessfully permanently deleted
+                                                        404 if DNE
+GET    /artists                 | None             |   Array of all artists 
+GET    /artists/Mariah%20Carey  | None             |   Artist, if sucessful
+                                                        404 if DNE
+PUT    /data (dev only)         | Array of artists |   200 if database cleared and reloaded
+
+Is it required to be able to change an artists name?
 
 Soft-delete? Not until requirements say so
 
