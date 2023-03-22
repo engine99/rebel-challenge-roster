@@ -82,7 +82,7 @@ GET    /artists/Mariah%20Carey  | None             |   Artist, if sucessful
                                                         404 if DNE
 PUT    /data (dev only)         | Array of artists |   200 if database cleared and reloaded
 
-Is it required to be able to change an artists name?
+Is it required to be able to change an artists name? Forbid!
 
 Soft-delete? Not until requirements say so
 
