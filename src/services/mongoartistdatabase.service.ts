@@ -6,6 +6,7 @@ class MongoArtistDatabase implements ArtistDatabase {
 
     private client: MongoClient;
     private collection: Collection<Artist>;
+    private defaultArtist: Artist = { name: "", rate:0.0, streams:0};
 
     // Database Name
     private dbName = 'RebelChallengeArtistDatabase';
@@ -34,11 +35,11 @@ class MongoArtistDatabase implements ArtistDatabase {
         return this.collection.find({}).toArray();
     }
 
-    create(artists: Artist[]): Promise<void> {
-        return this.collection.insertMany(artists).then((artists)=>{
-            console.log('inserted %d', artists.insertedCount)
-        }).catch((reason)=>{
-            console.error("Mongo error: ",reason)});
+    createMany(artists: Artist[]): Promise<number> {
+        return this.collection.insertMany(artists).then((result)=>{
+            console.log('inserted %d', result.insertedCount)
+            return result.insertedCount;
+        })
     }
 
     drop() {
@@ -48,6 +49,19 @@ class MongoArtistDatabase implements ArtistDatabase {
     findOne(id: string): Promise<Artist> {
         return this.collection.findOne({_id:new ObjectId(id)});
     };
+
+    createArtist(): Promise<string> {
+        return this.collection.insertOne(this.defaultArtist).then((result) => {
+            return result.insertedId.toString();
+        })
+    }
+ 
+    update(id:string, artist: Artist): Promise<Artist> {
+        return this.collection.updateOne({_id: new ObjectId(id)}, { $set: artist}).then((result) => {
+            console.log('Inserted ', result.modifiedCount)
+            return artist;
+        })
+    }
 }
 
 export default MongoArtistDatabase;

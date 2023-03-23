@@ -1,6 +1,6 @@
 import { IsString, IsDecimal, isNumber, IsInt } from 'class-validator';
 
-export default class CreateUserDto {
+export class CreateArtistDto {
   @IsString()
   public name: string;
 
@@ -10,3 +10,5 @@ export default class CreateUserDto {
   @IsInt()
   public streams: number;
 }
+
+export default CreateArtistDto;

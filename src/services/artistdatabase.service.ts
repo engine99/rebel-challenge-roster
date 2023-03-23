@@ -3,9 +3,11 @@ import { WithId } from "mongodb";
 
 interface ArtistDatabase {
     list(): Promise<Artist[]>;
-    create(artists: Artist[]): Promise<void>;
+    createMany(artists: Artist[]): Promise<number>;
     findOne(id: string): Promise<Artist>;
     drop(): Promise<any>;
+    createArtist(): Promise<string>;
+    update(id: string, artist: Artist): Promise<Artist>;
 }
 
 export default ArtistDatabase;

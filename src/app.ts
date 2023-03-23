@@ -60,7 +60,9 @@ class App {
   private initializeRoutes() {
     this.app.get('/artists', this.artistController.listAll);
     this.app.get('/artists/:id', this.artistController.listOne);
-    this.app.post(`/postData`, this.artistController.postData);
+    this.app.get('/artists/:id', this.artistController.listOne);
+    this.app.post('/artists', this.artistController.createArtist);
+    this.app.put('/artists/:id', this.artistController.updateArtist)
 
     // this.app.get(``, this.usersController.getUserById);
     this.app.post(`/postData`, this.artistController.postData);
