@@ -64,6 +64,8 @@ Error pages? Standard. Embed error messages when running in dev env
 
 Containerization? No
 
+Pagination? Yes
+
 Q: What does 'CRUD for artists and rates' mean exactly? An artist is an object and a rate is a field.
 For simplicity, as a baseline, let's provide Artist-level REST API only. So:
 
