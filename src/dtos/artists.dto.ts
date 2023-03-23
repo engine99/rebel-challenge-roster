@@ -1,6 +1,6 @@
 import { IsString, IsDecimal, isNumber, IsInt } from 'class-validator';
 
-export class CreateUserDto {
+export default class CreateUserDto {
   @IsString()
   public name: string;
 

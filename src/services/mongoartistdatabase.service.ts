@@ -34,12 +34,15 @@ class MongoArtistDatabase implements ArtistDatabase {
         return this.collection.find({}).toArray();
     }
 
-    create(artists: Artist[]): Promise<Artist[]> {
-        return new Promise((resolve) => {return artists});
+    create(artists: Artist[]): Promise<void> {
+        return this.collection.insertMany(artists).then((artists)=>{
+            console.log('inserted %d', artists.insertedCount)
+        }).catch((reason)=>{
+            console.error("Mongo error: ",reason)});
     }
 
     drop() {
-        return new Promise(()=>{});
+        return this.collection.drop();
     }
 }
 

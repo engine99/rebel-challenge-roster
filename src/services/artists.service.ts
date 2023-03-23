@@ -9,15 +9,21 @@ class ArtistService {
         this.db = db;
     }
 
-    public load(artists: Artist[]): Promise<Artist[]> {
+    public load(artists: Artist[]): Promise<any> {
         return this.db
         .drop()
-            .then(() => {
-                return this.db.create(artists).then();
-            });
+            .then(
+                () => {
+                    const result = this.db.create(artists).then(()=>{
+
+                        console.log(result);
+                    });
+                    return result;
+            
+                });
     }
 
-    public async list(): Promise<Artist[]> {
+    public list(): Promise<Artist[]> {
         return this.db.list();
     }
 }
