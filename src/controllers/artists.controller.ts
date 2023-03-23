@@ -15,6 +15,7 @@ class ArtistsController {
       const all = this.artistsService.list().then((all) =>
         {
           res.status(201).json( all );
+          next();
         });
     } catch (error) {
       next(error);
@@ -29,11 +30,25 @@ class ArtistsController {
       this.artistsService.load(req.body).then((all) => 
         {  
           res.status(201).json( all );
+          next();
         });
     } catch (error) {
       next(error);
     }
   };
+
+  public listOne = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  try {
+      console.log('list one' + req.params.id);
+      this.artistsService.getById(req.params.id).then((all) => 
+        {  
+          res.status(200).json( all );
+          next();
+        });
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 export default ArtistsController;

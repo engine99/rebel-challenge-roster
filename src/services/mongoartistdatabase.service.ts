@@ -1,6 +1,6 @@
 import ArtistDatabase from "./artistdatabase.service";
 import { Artist } from "@/interfaces/artists.interface";
-import { Collection, MongoClient } from "mongodb";
+import { Collection, MongoClient, ObjectId, WithId } from "mongodb";
 
 class MongoArtistDatabase implements ArtistDatabase {
 
@@ -44,6 +44,10 @@ class MongoArtistDatabase implements ArtistDatabase {
     drop() {
         return this.collection.drop();
     }
+    
+    findOne(id: string): Promise<Artist> {
+        return this.collection.findOne({_id:new ObjectId(id)});
+    };
 }
 
 export default MongoArtistDatabase;

@@ -26,6 +26,10 @@ class ArtistService {
     public list(): Promise<Artist[]> {
         return this.db.list();
     }
+
+    public getById(id: string): Promise<Artist> {
+        return this.db.findOne(id);
+    }
 }
 
 export default ArtistService;

@@ -58,8 +58,11 @@ class App {
   }
 
   private initializeRoutes() {
-    this.app.get(``, this.artistController.listAll);
-    // this.app.get(`/:id(\\d+)`, this.usersController.getUserById);
+    this.app.get('/artists', this.artistController.listAll);
+    this.app.get('/artists/:id', this.artistController.listOne);
+    this.app.post(`/postData`, this.artistController.postData);
+
+    // this.app.get(``, this.usersController.getUserById);
     this.app.post(`/postData`, this.artistController.postData);
     // this.app.put(`/:id(\\d+)`, validationMiddleware(CreateUserDto, 'body', true), this.usersController.updateUser);
   }
