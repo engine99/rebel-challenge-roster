@@ -23,7 +23,6 @@ Your minimum application requirements include:
 - Complete solution
 - Try out jss
 
-
 ## Dev notes:
 Electing to use a Node runtime to intermediate between a web client and a nosql database.
 
@@ -82,17 +81,22 @@ GET    /artists/<id>            | None             |   200 and Artist, if sucess
                                                         404 if DNE
 PUT    /data (dev only)         | Array of artists |   200 if database cleared and reloaded
 
+and also:
+
+GET   /                         | None             |   Returns the front-end app
+
 Is it required to be able to change an artists name? Sure why not
 
 Soft-delete? Not until requirements say so
 
 Q: Will Artist ever appear twice in the data?
+I've added a uniqueness constraint on name in mongodb
 
 Q: Does the toggle lock Update/Delete?
 
 Security considerations:
 Require HTTPS? Yes
-DDOS protection? Yes, configure a throttle
+DDOS protection? Recommended. Configure a throttle when serverless
 Javascript injection protection
 
 Copyright 2023 engine99

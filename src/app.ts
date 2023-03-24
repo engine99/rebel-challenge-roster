@@ -75,6 +75,8 @@ public getServer() {
     this.app.delete('/artists/:id', this.artistController.dropOne);
 
     this.app.post(`/postData`, this.artistController.postData);
+    
+    this.app.use(express.static('react-client/build'));
     // this.app.put(`/:id(\\d+)`, validationMiddleware(CreateUserDto, 'body', true), this.usersController.updateUser);
   }
 
