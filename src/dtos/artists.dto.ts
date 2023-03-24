@@ -1,10 +1,10 @@
-import { IsString, IsDecimal, isNumber, IsInt } from 'class-validator';
+import { IsString, IsInt, IsNumber } from 'class-validator';
 
 export class CreateArtistDto {
   @IsString()
   public name: string;
 
-  @IsDecimal()
+  @IsNumber()
   public rate: number;
 
   @IsInt()

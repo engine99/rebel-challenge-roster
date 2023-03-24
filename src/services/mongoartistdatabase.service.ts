@@ -6,7 +6,7 @@ class MongoArtistDatabase implements ArtistDatabase {
 
     private client: MongoClient;
     private collection: Collection<Artist>;
-    private defaultArtist: Artist = { name: "", rate:0.0, streams:0};
+    readonly defaultArtist: Artist = { name: null, rate:0.0, streams:0};
 
     // Database Name
     private dbName = 'RebelChallengeArtistDatabase';
@@ -17,18 +17,21 @@ class MongoArtistDatabase implements ArtistDatabase {
         console.log('Created mongo client at ' + uri);
     }
 
-    async connect() {
-    
+    async connect(): Promise<void> {
         // Use connect method to connect to the server
         try {
-            console.log('Attempting to connect to server');
+            console.debug('Attempting to connect to server');
             await this.client.connect();
-            console.log('Connected successfully to server');
+            console.debug('Connected successfully to server');
             const db = this.client.db(this.dbName);
             this.collection = db.collection('artists');
         } catch (e) {
-            console.log('Bad Connection: ' + e.toString())
+            console.error('Bad Connection: ' + e.toString())
         }
+    }
+
+    async disconnect(): Promise<void> {
+        this.client.close();
     }
 
     list(): Promise<Artist[]> {
@@ -37,7 +40,7 @@ class MongoArtistDatabase implements ArtistDatabase {
 
     createMany(artists: Artist[]): Promise<number> {
         return this.collection.insertMany(artists).then((result)=>{
-            console.log('inserted %d', result.insertedCount)
+            console.debug('inserted %d', result.insertedCount)
             return result.insertedCount;
         })
     }
@@ -51,7 +54,7 @@ class MongoArtistDatabase implements ArtistDatabase {
     };
 
     createArtist(): Promise<string> {
-        return this.collection.insertOne(this.defaultArtist).then((result) => {
+        return this.collection.insertOne({...this.defaultArtist}).then((result) => {
             return result.insertedId.toString();
         })
     }
@@ -61,6 +64,10 @@ class MongoArtistDatabase implements ArtistDatabase {
             console.log('Inserted ', result.modifiedCount)
             return artist;
         })
+    }
+    
+    dropOne(id: string): Promise<number> {
+        return this.collection.deleteOne({_id: new ObjectId(id)}).then((res) => {return(res.deletedCount ? 1 : 0)})
     }
 }
 

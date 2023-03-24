@@ -1,6 +1,10 @@
 import { Artist } from '@interfaces/artists.interface'
 import ArtistDatabase from './artistdatabase.service';
 
+
+/** 
+A class for Artist business logic, independent of front-end (i.e. HTTP) and database implementation (i.e. mongodb)
+*/
 class ArtistService {
     db: ArtistDatabase;
 
@@ -35,6 +39,10 @@ class ArtistService {
 
     public update(id: string, artist: Artist): Promise<Artist> {
         return this.db.update(id, artist);
+    }
+
+    public dropOne(id: string): Promise<number> {
+        return this.db.dropOne(id);
     }
 }
 

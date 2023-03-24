@@ -9,6 +9,8 @@ import { logger, stream } from '@utils/logger';
 import MongoArtistDatabase from './services/mongoartistdatabase.service'
 import ArtistsController from './controllers/artists.controller';
 import ArtistService from './services/artists.service';
+import validationMiddleware from './middlewares/validation.middleware';
+import CreateArtistDto from './dtos/artists.dto';
 
 class App {
   public app: express.Application;
@@ -31,9 +33,17 @@ class App {
     this.initializeRoutes();
     this.initializeErrorHandling();
   }
+  
+  public connect():Promise<void> {
+    return this.artistDatabase.connect()
+  }
+
+  public disconnect():Promise<void> {
+    return this.artistDatabase.disconnect();
+  }
 
   public listen() {
-    this.artistDatabase.connect().then(() => {
+    this.connect().then(() => {
       this.app.listen(this.port, () => {
         logger.info(`=================================`);
         logger.info(`======= ENV: ${this.env} =======`);
@@ -44,7 +54,7 @@ class App {
       });
   }
 
-  public getServer() {
+public getServer() {
     return this.app;
   }
 
@@ -59,12 +69,11 @@ class App {
 
   private initializeRoutes() {
     this.app.get('/artists', this.artistController.listAll);
-    this.app.get('/artists/:id', this.artistController.listOne);
-    this.app.get('/artists/:id', this.artistController.listOne);
     this.app.post('/artists', this.artistController.createArtist);
-    this.app.put('/artists/:id', this.artistController.updateArtist)
+    this.app.put('/artists/:id', validationMiddleware(CreateArtistDto, 'body', false), this.artistController.updateArtist)
+    this.app.get('/artists/:id', this.artistController.listOne);
+    this.app.delete('/artists/:id', this.artistController.dropOne);
 
-    // this.app.get(``, this.usersController.getUserById);
     this.app.post(`/postData`, this.artistController.postData);
     // this.app.put(`/:id(\\d+)`, validationMiddleware(CreateUserDto, 'body', true), this.usersController.updateUser);
   }
