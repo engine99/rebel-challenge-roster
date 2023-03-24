@@ -45,7 +45,7 @@ development, easy to remove later if needed.
 
 Persistence? Free tier serverless MongoDB Atlas
 
-Deployment? Darren's account.
+Deployment? Darren's account
 
 Domain? TBD
 
