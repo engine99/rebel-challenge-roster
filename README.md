@@ -26,11 +26,11 @@ Your minimum application requirements include:
 ## Dev notes:
 Electing to use a Node runtime to intermediate between a web client and a nosql database.
 
-As I do not know when the demonstration will start and end, and want to have little ongoing cost, I'll deploy files and API in a serverless approach. 
+As I do not know when the demonstration will start and end, and want to have little ongoing cost, I'll deploy files and API in a serverless approach.
 
 Electing to use AWS. Most familiar there.
 
-Node a popular choice and I can deploy it to Lambda (ie serverless) or EC2. 
+Node a popular choice and I can deploy it to Lambda (ie serverless) or EC2.
 API Gateway provides a rest interface, triggering Lambda code.
 
 Front-end? Again, serverless deployment. Simple React app.
@@ -76,7 +76,7 @@ PUT    /artists/<id>            | Artist object    |   200 and Artist, if sucess
                                                         400 if malformed
 DELETE /artists/<id>            | Artist object    |   200 and Artist, if sucessfully permanently deleted
                                                         404 if DNE
-GET    /artists                 | None             |   200 and Array of all artists 
+GET    /artists                 | None             |   200 and Array of all artists
 GET    /artists/<id>            | None             |   200 and Artist, if sucessful
                                                         404 if DNE
 PUT    /data (dev only)         | Array of artists |   200 if database cleared and reloaded
@@ -98,6 +98,13 @@ Security considerations:
 Require HTTPS? Yes
 DDOS protection? Recommended. Configure a throttle when serverless
 Javascript injection protection
+
+Dev questions:
+node run dev gives app crashed. Why do I not see an error and stack at 'app crashed'? And not caught in errorMiddleware?
+Ah, it's logged to src/utils/error/
+
+
+
 
 Copyright 2023 engine99
 
