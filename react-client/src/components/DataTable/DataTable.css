@@ -28,7 +28,11 @@ tr:not(.selected):nth-child(odd) td {
 .minorprefix {
   font-size: calc(20px + 1vmin);;
   text-align: center;
-  
+}
+
+.minorpostfix {
+  font-size: calc(10px + 1vmin);;
+  text-align: center;
 }
 
 tr.selected {

@@ -20,7 +20,10 @@ const DataTable: FC = () => {
     return (
       <tr>
         <th>Name</th>
-        <th className=''>Rate</th>
+        <th className=''>
+          <span>Rate</span>
+          {/* <span className='minorpostfix'> x1000</span> */}
+        </th>
         <th className=''>Streams</th>
         <th className='droppable'>Payout</th>
       </tr>
@@ -36,7 +39,7 @@ const DataTable: FC = () => {
         >
           <td className='namecol'>{row.artist}</td>
           <td className='numcol'>
-            <span><NumericFormat value={row.rate} displayType={'text'} thousandSeparator={true} decimalScale={4} fixedDecimalScale /></span>
+            <span><NumericFormat value={row.rate*1000} displayType={'text'} thousandSeparator={true} decimalScale={2} fixedDecimalScale /></span>
           </td>
           <td className='numcol'>
             <span><NumericFormat value={row.streams} displayType={'text'} thousandSeparator={true} decimalScale={0} fixedDecimalScale/></span>
