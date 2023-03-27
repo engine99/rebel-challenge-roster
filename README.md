@@ -18,10 +18,22 @@ Your minimum application requirements include:
 - Adding a field to toggle (and persist) whether the artist payout is complete (eg: checkbox)
 - Display is sorted in descending order by payout amount
 
-
 ## Focus
 - Complete solution
 - Try out jss
+
+## To run:
+Provision a mongodb server. Create a database 'ArtistRoster_development' and a collection 'Artists'. Add index with fields {
+  name:1
+} and options
+{ unique:true,
+partialFilterExpression: { $type: "string" } }
+
+In react-client, run 'npm build'
+
+In root directory, run 'npm start'
+
+
 
 ## Dev notes:
 Electing to use a Node runtime to intermediate between a web client and a nosql database.

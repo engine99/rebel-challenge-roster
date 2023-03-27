@@ -2,7 +2,7 @@ import { IsString, IsInt, IsNumber } from 'class-validator';
 
 export class CreateArtistDto {
   @IsString()
-  public name: string;
+  public artist: string;
 
   @IsNumber()
   public rate: number;

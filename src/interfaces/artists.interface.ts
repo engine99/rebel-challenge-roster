@@ -1,5 +1,5 @@
 export interface Artist {
-    name: string;
+    artist: string;
     rate: number;
     streams: number;
   }

@@ -1,6 +1,11 @@
+@font-face {
+  font-family: 'Kleymissky';
+  src: url('../public/Kleymissky-0xBG.otf') format('opentype');
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: Kleymissky, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
     background-color: aliceblue;
@@ -14,8 +19,10 @@ code {
 }
 
 .body {
-  margin-top:70px;
-  font-size: calc(10px + 2vmin);;
+  margin-top: 70px;
+  font-size: calc(20px + 4vmin);
+  max-height: 100%;
+  overflow-y: scroll;
 }
 
 

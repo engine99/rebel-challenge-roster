@@ -1,6 +1,6 @@
 export interface Artist {
     _id: string;
-    name: string;
+    artist: string;
     rate: number;
     streams: number;
   }

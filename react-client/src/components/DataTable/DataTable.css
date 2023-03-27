@@ -4,14 +4,34 @@ table {
 }
 
 th {
-  background-color: #b5bac2;
+  padding:2vmin;
 }
 
-tr:nth-child(even){
-  background-color: #e5e9f0 ;
+td {
+  padding:10px;
+}
+
+tr:not(.selected):nth-child(odd) td {
+  background-color: #e5e9f0;
+}
+
+.namecol {
+  text-align: left;
+  font-size: calc(20px + 1vmin);;
 }
 
 .numcol {
   text-align: right;
+  padding: 2vmin;
+}
+
+.minorprefix {
+  font-size: calc(20px + 1vmin);;
+  text-align: center;
+  
+}
+
+tr.selected {
+  background-color: gold;
 }
 

@@ -1,15 +1,15 @@
 import ArtistDatabase from "./artistdatabase.service";
 import { Artist } from "@/interfaces/artists.interface";
 import { Collection, MongoClient, ObjectId, WithId } from "mongodb";
-
+import { NODE_ENV } from "@/config";
 class MongoArtistDatabase implements ArtistDatabase {
 
     private client: MongoClient;
     private collection: Collection<Artist>;
-    readonly defaultArtist: Artist = { name: null, rate:0.0, streams:0};
+    readonly defaultArtist: Artist = { artist: null, rate:0.0, streams:0};
 
-    // Database Name
-    private dbName = 'RebelChallengeArtistDatabase';
+    // Database name depends on environment
+    private dbName = 'ArtistRoster_'+ NODE_ENV;
     
     constructor(url:string, secret:string) {    
         const uri = `mongodb+srv://dbUser:${secret}@${url}/?retryWrites=true&w=majority`;
@@ -46,7 +46,7 @@ class MongoArtistDatabase implements ArtistDatabase {
     }
 
     drop() {
-        return this.collection.drop();
+        return this.collection.deleteMany();
     }
     
     findOne(id: string): Promise<Artist> {

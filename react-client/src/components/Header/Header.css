@@ -15,7 +15,7 @@
   color: white;
   min-height: 100vh;
   width: 100%;
-  position: absolute;
+  position: fixed;
   top: 0px;
 }
 
@@ -28,7 +28,7 @@
 }
 
 .headline {
-  font-size: calc(10px + 2vmin);;
+  font-size: calc(10px + 3vmin);;
   position: absolute;
   width: 100%;
   top: 70%;

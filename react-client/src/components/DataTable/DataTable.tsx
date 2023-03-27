@@ -1,49 +1,66 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, SyntheticEvent, useEffect, useState } from 'react';
 import { Artist } from '../../models/Artist'
 import './DataTable.css'
+import { NumericFormat } from 'react-number-format';
+import 'react-bootstrap'
 
 const DataTable: FC = () => {
-   const [data, setData] = useState([]);
+  const [data, setData] = useState([]);
+  const [selectedRow, setSelectedRow] = useState<string | null>(null);
 
-   useEffect(() => {
-     async function fetchData() {
-       const response = await fetch('http://localhost:3000/artists');
-       const json = await response.json();
-       setData(json);
-     }
-     fetchData();
-   }, []);
+  useEffect(() => {
+    async function fetchData() {
+      const response = await fetch('http://localhost:3000/artists');
+      const json = await response.json();
+      setData(json);
+    }
+    fetchData();
+  }, []);
 
+  const renderHeader = (): JSX.Element => {
+    return (
+      <tr>
+        <th>Name</th>
+        <th className=''>Rate</th>
+        <th className=''>Streams</th>
+        <th className=''>Payout</th>
+      </tr>
+    );
+  };
 
-   const renderHeader = (): JSX.Element => {
+  const renderRows = (): JSX.Element[] => {
+    return data.map((row: Artist, index: number) => {
       return (
-         <tr>
-            <th>Name</th>
-            <th className='numcol'>Rate</th>
-            <th className='numcol'>Streams</th>
-         </tr>
+        <tr key={index} className={selectedRow === row._id ? 'selected' : ''}
+          onClick={() => setSelectedRow(row._id)}
+          onTouchStart={() => setSelectedRow(row._id)}
+        >
+          <td className='namecol'>{row.artist}</td>
+          <td className='numcol'>
+            <span><NumericFormat value={row.rate} displayType={'text'} thousandSeparator={true} decimalScale={2} fixedDecimalScale/></span>
+          </td>
+          <td className='numcol'>
+            <span><NumericFormat value={row.streams} displayType={'text'} thousandSeparator={true} decimalScale={0} fixedDecimalScale/></span>
+          </td>
+          <td className='numcol d-md-block d-sm-none'>
+            <span className='minorprefix'>$</span>
+            <span><NumericFormat value={row.streams * row.rate} displayType={'text'} thousandSeparator={true} decimalScale={2} fixedDecimalScale/></span>
+          </td>
+        </tr>
       );
-      };
+    });
+  };
 
-      const renderRows = (): JSX.Element[] => {
-      return data.map((row: Artist, index: number) => {
-         return (
-            <tr key={index}>
-            <td>{row.name}</td>
-            <td className='numcol'>{row.rate.toLocaleString(navigator.language, { minimumFractionDigits: 2 })}</td>
-            <td className='numcol'>{row.streams}</td>
-            </tr>
-         );
-      });
-      };
+  return (
+    <div
 
-      return (
-         <div>
-           <table className=''>
-             <thead>{renderHeader()}</thead>
-             <tbody>{renderRows()}</tbody>
-           </table>
-           {/* <div>
+    >
+      <table> 
+        <thead>{renderHeader()}</thead>
+        <tbody>{renderRows()}</tbody>
+
+      </table>
+      {/* <div>
              <ul className="pagination">
                {pageNumbers.map((number: number) => {
                  return (
@@ -58,8 +75,8 @@ const DataTable: FC = () => {
                })}
              </ul>
            </div> */}
-         </div>
-       );
+    </div>
+  );
 
 }
 
