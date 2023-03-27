@@ -30,7 +30,7 @@ const DataTable: FC = () => {
          return (
             <tr key={index}>
             <td>{row.name}</td>
-            <td className='numcol'>{row.rate}</td>
+            <td className='numcol'>{row.rate.toLocaleString(navigator.language, { minimumFractionDigits: 2 })}</td>
             <td className='numcol'>{row.streams}</td>
             </tr>
          );

@@ -1,6 +1,14 @@
 table {
   width:100%;
-  padding:50px;
+  padding:50px;;
+}
+
+th {
+  background-color: #b5bac2;
+}
+
+tr:nth-child(even){
+  background-color: #e5e9f0 ;
 }
 
 .numcol {
