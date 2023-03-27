@@ -6,7 +6,7 @@ import morgan from 'morgan';
 import { NODE_ENV, PORT, MONGO_URL, MONGO_SECRET, LOG_FORMAT, ORIGIN, CREDENTIALS } from '@config';
 import errorMiddleware from '@middlewares/error.middleware';
 import { logger, stream } from '@utils/logger';
-import MongoArtistDatabase from './services/mongoartistdatabase.service'
+import MongoArtistDatabase from './services/mongoartistdatabase.service';
 import ArtistsController from './controllers/artists.controller';
 import ArtistService from './services/artists.service';
 import validationMiddleware from './middlewares/validation.middleware';
@@ -16,9 +16,9 @@ class App {
   public app: express.Application;
   public env: string;
   public port: string | number;
-  private artistDatabase: MongoArtistDatabase
+  private artistDatabase: MongoArtistDatabase;
   private artistController: ArtistsController;
-  private artistService: ArtistService
+  private artistService: ArtistService;
 
   constructor() {
     this.app = express();
@@ -33,36 +33,39 @@ class App {
     this.initializeRoutes();
     this.initializeErrorHandling();
   }
-  
-  public connect():Promise<void> {
-    return this.artistDatabase.connect()
+
+  public connect(): Promise<void> {
+    return this.artistDatabase.connect();
   }
 
-  public disconnect():Promise<void> {
+  public disconnect(): Promise<void> {
     return this.artistDatabase.disconnect();
   }
 
   public listen() {
-    this.connect().then(() => {
-      this.app.listen(this.port, () => {
-        logger.info(`=================================`);
-        logger.info(`======= ENV: ${this.env} =======`);
-        logger.info(`🚀 App listening on the port ${this.port}`);
-        logger.info(`=================================`);
-      })}).catch((e) => {
-        console.log("myerror ", e)
+    this.connect()
+      .then(() => {
+        this.app.listen(this.port, () => {
+          logger.info(`=================================`);
+          logger.info(`======= ENV: ${this.env} =======`);
+          logger.info(`🚀 App listening on the port ${this.port}`);
+          logger.info(`=================================`);
+        });
+      })
+      .catch(e => {
+        console.log('myerror ', e);
       });
   }
 
-public getServer() {
+  public getServer() {
     return this.app;
   }
 
   private initializeMiddlewares() {
     this.app.use(morgan(LOG_FORMAT, { stream }));
     this.app.use(cors({ origin: ORIGIN, credentials: CREDENTIALS }));
-    this.app.use(hpp());        // Query parameter sanitation
-    this.app.use(helmet());     // Setting some security-related headers
+    this.app.use(hpp()); // Query parameter sanitation
+    this.app.use(helmet()); // Setting some security-related headers
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: true }));
   }
@@ -70,12 +73,12 @@ public getServer() {
   private initializeRoutes() {
     this.app.get('/artists', this.artistController.listAll);
     this.app.post('/artists', this.artistController.createArtist);
-    this.app.put('/artists/:id', validationMiddleware(CreateArtistDto, 'body', false), this.artistController.updateArtist)
+    this.app.put('/artists/:id', validationMiddleware(CreateArtistDto, 'body', false), this.artistController.updateArtist);
     this.app.get('/artists/:id', this.artistController.listOne);
     this.app.delete('/artists/:id', this.artistController.dropOne);
 
     this.app.post(`/postData`, this.artistController.postData);
-    
+
     this.app.use(express.static('react-client/build'));
     // this.app.put(`/:id(\\d+)`, validationMiddleware(CreateUserDto, 'body', true), this.usersController.updateUser);
   }

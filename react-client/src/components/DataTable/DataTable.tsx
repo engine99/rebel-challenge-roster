@@ -1,8 +1,8 @@
 import React, { FC, useEffect, useState } from 'react';
 import { Artist } from '../../models/Artist'
+import './DataTable.css'
 
-
-const DataTable: FC = () => { 
+const DataTable: FC = () => {
    const [data, setData] = useState([]);
 
    useEffect(() => {
@@ -19,8 +19,8 @@ const DataTable: FC = () => {
       return (
          <tr>
             <th>Name</th>
-            <th>Rate</th>
-            <th>Streams</th>
+            <th className='numcol'>Rate</th>
+            <th className='numcol'>Streams</th>
          </tr>
       );
       };
@@ -30,16 +30,16 @@ const DataTable: FC = () => {
          return (
             <tr key={index}>
             <td>{row.name}</td>
-            <td>{row.rate}</td>
-            <td>{row.streams}</td>
+            <td className='numcol'>{row.rate}</td>
+            <td className='numcol'>{row.streams}</td>
             </tr>
          );
       });
       };
-   
+
       return (
          <div>
-           <table>
+           <table className=''>
              <thead>{renderHeader()}</thead>
              <tbody>{renderRows()}</tbody>
            </table>
