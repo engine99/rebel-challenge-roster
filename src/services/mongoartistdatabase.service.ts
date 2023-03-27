@@ -40,7 +40,7 @@ class MongoArtistDatabase implements ArtistDatabase {
     }
 
     list(): Promise<Artist[]> {
-        return this.collection.find({}).toArray();
+        return this.collection.find({}).sort({payout:-1}).toArray();
     }
 
     createMany(artists: Artist[]): Promise<number> {

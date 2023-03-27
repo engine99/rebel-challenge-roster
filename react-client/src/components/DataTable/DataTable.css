@@ -4,7 +4,7 @@ table {
 }
 
 th {
-  padding:2vmin;
+  padding:1vmin;
 }
 
 td {
@@ -33,6 +33,16 @@ tr:not(.selected):nth-child(odd) td {
 
 tr.selected {
   background-color: gold;
+}
+
+.editbutton:not(.selected) {
+  display:none
+}
+
+.editbutton.selected {
+  background-color:palegoldenrod;
+  position: absolute;
+  right: 50px;
 }
 
 @media (max-width: 600px) {

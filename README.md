@@ -24,14 +24,17 @@ Your minimum application requirements include:
 
 ## To run:
 Provision a mongodb server. Create a database 'ArtistRoster_development' and a collection 'Artists'. Add index with fields {
-  name:1
+  artist:1
 } and options
 { unique:true,
-partialFilterExpression: { $type: "string" } }
+partialFilterExpression: { $type: "string" } }. Create another index on payout:
+{ payout:-1 }
 
 In react-client, run 'npm build'
 
 In root directory, run 'npm start'
+
+To debug react-client, in react-client, run npm run dev. Start on port 3001
 
 
 

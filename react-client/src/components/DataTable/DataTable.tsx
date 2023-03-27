@@ -36,7 +36,7 @@ const DataTable: FC = () => {
         >
           <td className='namecol'>{row.artist}</td>
           <td className='numcol'>
-            <span><NumericFormat value={row.rate} displayType={'text'} thousandSeparator={true} decimalScale={2} fixedDecimalScale/></span>
+            <span><NumericFormat value={row.rate} displayType={'text'} thousandSeparator={true} decimalScale={4} fixedDecimalScale /></span>
           </td>
           <td className='numcol'>
             <span><NumericFormat value={row.streams} displayType={'text'} thousandSeparator={true} decimalScale={0} fixedDecimalScale/></span>
@@ -45,7 +45,11 @@ const DataTable: FC = () => {
             <span className='minorprefix'>$</span>
             <span><NumericFormat value={row.payout} displayType={'text'} thousandSeparator={true} decimalScale={2} fixedDecimalScale/></span>
           </td>
+          <div className={selectedRow === row._id ? 'selected editbutton' : 'editbutton'} >
+            Edit
+          </div>
         </tr>
+
       );
     });
   };
