@@ -1,5 +1,5 @@
 # rebel-challenge-roster
-Music streaming accounting service
+Music streaming accounting app and api
 
 A demonstration
 

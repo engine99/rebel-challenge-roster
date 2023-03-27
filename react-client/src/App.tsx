@@ -7,7 +7,7 @@ function App() {
     <div className="App">
       <header className="App-header shrink-header">
           <div className="headline">
-            Artist roster
+            Artist Roster
           </div>
         <div className="logo-box">
           <img src={logo} className="App-logo shrink-logo" alt="logo" />
