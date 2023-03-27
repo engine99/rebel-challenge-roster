@@ -17,11 +17,12 @@ class ArtistService {
         .drop()
             .then(
                 () => {
+                    artists.forEach(this.setPayout); 
+
                     const result = this.db.createMany(artists).then(()=>{
                         console.log(result);
                     });
                     return result;
-            
                 });
     }
 
@@ -38,11 +39,20 @@ class ArtistService {
     }
 
     public update(id: string, artist: Artist): Promise<Artist> {
+        this.setPayout(artist);
         return this.db.update(id, artist);
     }
 
     public dropOne(id: string): Promise<number> {
         return this.db.dropOne(id);
+    }
+
+    private setPayout(x) {
+        try {
+            x.payout = x.rate * x.streams
+        } catch {
+            x.payout = 0.0;
+        }
     }
 }
 

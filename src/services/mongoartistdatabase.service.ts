@@ -6,7 +6,12 @@ class MongoArtistDatabase implements ArtistDatabase {
 
     private client: MongoClient;
     private collection: Collection<Artist>;
-    readonly defaultArtist: Artist = { artist: null, rate:0.0, streams:0};
+    readonly defaultArtist: Artist = { 
+        artist: null, 
+        rate:0.0, 
+        streams:0,
+        payout:0.0
+    };
 
     // Database name depends on environment
     private dbName = 'ArtistRoster_'+ NODE_ENV;

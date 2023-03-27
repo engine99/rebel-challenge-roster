@@ -35,3 +35,8 @@ tr.selected {
   background-color: gold;
 }
 
+@media (max-width: 600px) {
+  .droppable {
+    display:none; 
+  }
+}

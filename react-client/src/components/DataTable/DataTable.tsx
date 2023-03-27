@@ -2,7 +2,6 @@ import React, { FC, SyntheticEvent, useEffect, useState } from 'react';
 import { Artist } from '../../models/Artist'
 import './DataTable.css'
 import { NumericFormat } from 'react-number-format';
-import 'react-bootstrap'
 
 const DataTable: FC = () => {
   const [data, setData] = useState([]);
@@ -23,7 +22,7 @@ const DataTable: FC = () => {
         <th>Name</th>
         <th className=''>Rate</th>
         <th className=''>Streams</th>
-        <th className=''>Payout</th>
+        <th className='droppable'>Payout</th>
       </tr>
     );
   };
@@ -42,9 +41,9 @@ const DataTable: FC = () => {
           <td className='numcol'>
             <span><NumericFormat value={row.streams} displayType={'text'} thousandSeparator={true} decimalScale={0} fixedDecimalScale/></span>
           </td>
-          <td className='numcol d-md-block d-sm-none'>
+          <td className='numcol droppable'>
             <span className='minorprefix'>$</span>
-            <span><NumericFormat value={row.streams * row.rate} displayType={'text'} thousandSeparator={true} decimalScale={2} fixedDecimalScale/></span>
+            <span><NumericFormat value={row.payout} displayType={'text'} thousandSeparator={true} decimalScale={2} fixedDecimalScale/></span>
           </td>
         </tr>
       );
