@@ -1,6 +1,7 @@
 table {
   width:100%;
-  padding:50px;;
+  padding: calc( 5vmin );
+  padding-top: 50px;
 }
 
 th {
@@ -17,16 +18,17 @@ tr:not(.selected):nth-child(odd) td {
 
 .namecol {
   text-align: left;
-  font-size: calc(20px + 1vmin);;
+  font-size: calc(20px + 1vmin);
 }
 
 .numcol {
   text-align: right;
-  padding: 2vmin;
+  padding: 4vmin;
+  padding-bottom: 0vmin;
 }
 
 .minorprefix {
-  font-size: calc(20px + 1vmin);;
+  font-size: calc(20px + 1vmin);
   text-align: center;
 }
 

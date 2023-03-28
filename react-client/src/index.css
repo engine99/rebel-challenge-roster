@@ -22,7 +22,6 @@ code {
   margin-top: 70px;
   font-size: calc(20px + 4vmin);
   max-height: 100%;
-  overflow-y: scroll;
 }
 
 

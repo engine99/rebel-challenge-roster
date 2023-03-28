@@ -14,9 +14,9 @@ Your minimum application requirements include:
 - A hosted MVC structure with separate front and back ends
 - Displaying the list in a web browser
 - Extending the list to include the calculated payout amount per artist
+- Display is sorted in descending order by payout amount
 - CRUD services for artists and rates
 - Adding a field to toggle (and persist) whether the artist payout is complete (eg: checkbox)
-- Display is sorted in descending order by payout amount
 
 ## Focus
 - Complete solution
@@ -30,14 +30,11 @@ Provision a mongodb server. Create a database 'ArtistRoster_development' and a c
 partialFilterExpression: { $type: "string" } }. Create another index on payout:
 { payout:-1 }
 
-
 In root directory, run 'npm start'
 
 To debug react-client, in react-client, run npm run dev. Start on port 3001.
 
 In react-client, run 'npm build'. Have next to package.json a .env file defining PUBLIC_URL
-
-
 
 ## Dev notes:
 Electing to use a Node runtime to intermediate between a web client and a nosql database.
@@ -118,8 +115,6 @@ Javascript injection protection
 Dev questions:
 node run dev gives app crashed. Why do I not see an error and stack at 'app crashed'? And not caught in errorMiddleware?
 Ah, it's logged to src/utils/error/
-
-
 
 
 Copyright 2023 engine99

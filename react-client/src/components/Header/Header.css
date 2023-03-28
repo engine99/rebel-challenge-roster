@@ -28,7 +28,7 @@
 }
 
 .headline {
-  font-size: calc(20px + 3vmin);;
+  font-size: calc(20px + 10vmin);;
   position: absolute;
   width: 100%;
   top: 70%;
@@ -56,6 +56,7 @@
 @keyframes shrink-headline {
   to {
     top:20%;
+    font-size: calc(20px + 3vmin)
   }
 }
 

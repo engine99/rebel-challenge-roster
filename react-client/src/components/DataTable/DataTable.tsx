@@ -6,10 +6,12 @@ import { NumericFormat } from 'react-number-format';
 const DataTable: FC = () => {
   const [data, setData] = useState([]);
   const [selectedRow, setSelectedRow] = useState<string | null>(null);
-
+  
   useEffect(() => {
     async function fetchData() {
-      const response = await fetch('http://localhost:3000/artists');
+      const dest = `${process.env.API_URL || 'http://localhost:3000/artists'}`;
+
+      const response = await fetch(dest);
       const json = await response.json();
       setData(json);
     }
@@ -37,34 +39,32 @@ const DataTable: FC = () => {
           onClick={() => setSelectedRow(row._id)}
           onTouchStart={() => setSelectedRow(row._id)}
         >
-          <td className='namecol'>{row.artist}</td>
+          <td className='namecol'>
+            {row.artist}
+          </td>
           <td className='numcol'>
             <span><NumericFormat value={row.rate*1000} displayType={'text'} thousandSeparator={true} decimalScale={2} fixedDecimalScale /></span>
           </td>
           <td className='numcol'>
             <span><NumericFormat value={row.streams} displayType={'text'} thousandSeparator={true} decimalScale={0} fixedDecimalScale/></span>
+            <div className={selectedRow === row._id ? 'selected editbutton' : 'editbutton'} >
+              Edit
+            </div>
           </td>
           <td className='numcol droppable'>
             <span className='minorprefix'>$</span>
             <span><NumericFormat value={row.payout} displayType={'text'} thousandSeparator={true} decimalScale={2} fixedDecimalScale/></span>
           </td>
-          <div className={selectedRow === row._id ? 'selected editbutton' : 'editbutton'} >
-            Edit
-          </div>
         </tr>
-
       );
     });
   };
 
   return (
-    <div
-
-    >
+    <div>
       <table> 
         <thead>{renderHeader()}</thead>
         <tbody>{renderRows()}</tbody>
-
       </table>
       {/* <div>
              <ul className="pagination">
