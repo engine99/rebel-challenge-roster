@@ -1,42 +1,19 @@
 import ArtistDatabase from "./artistdatabase.service";
 import { Artist } from "@/interfaces/artists.interface";
-import { Collection, MongoClient, ObjectId, WithId } from "mongodb";
-import { NODE_ENV } from "@/config";
+import { Collection, Db, ObjectId } from "mongodb";
 class MongoArtistDatabase implements ArtistDatabase {
 
-    private client: MongoClient;
     private collection: Collection<Artist>;
+
     readonly defaultArtist: Artist = { 
         artist: null, 
         rate:0.0, 
         streams:0,
         payout:0.0
     };
-
-    // Database name depends on environment
-    private dbName = 'ArtistRoster_'+ NODE_ENV;
-    
-    constructor(url:string, secret:string) {    
-        const uri = `mongodb+srv://dbUser:${secret}@${url}/?retryWrites=true&w=majority`;
-        this.client = new MongoClient(uri);
-        console.log('Created mongo client at ' + uri);
-    }
-
-    async connect(): Promise<void> {
-        // Use connect method to connect to the server
-        try {
-            console.debug('Attempting to connect to server');
-            await this.client.connect();
-            console.debug('Connected successfully to server');
-            const db = this.client.db(this.dbName);
-            this.collection = db.collection('artists');
-        } catch (e) {
-            console.error('Bad Connection: ' + e.toString())
-        }
-    }
-
-    async disconnect(): Promise<void> {
-        this.client.close();
+     
+    constructor(db: Db) {    
+        this.collection = db.collection('artists');
     }
 
     list(): Promise<Artist[]> {

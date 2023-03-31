@@ -1,0 +1,46 @@
+# AWS CloudFormation Template
+AWSTemplateFormatVersion: 2010-09-09
+Description: >-
+  rebel-challenge-roster-sam
+Transform:
+- AWS::Serverless-2016-10-31
+
+Resources:
+
+  # This is a Lambda function config associated with the source code: get-all-items.js
+  getAllItemsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: ./
+      Handler: serverless.handler
+      Runtime: nodejs18.x
+      Architectures:
+        - x86_64
+      MemorySize: 128
+      Timeout: 100
+      Description: A simple example includes a HTTP get method to get all items from a DynamoDB table.
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /artists
+            Method: GET
+      Environment:
+        Variables:
+          MONGO_URL: rebelchallengeartistdat.wqgvu.mongodb.net
+          MONGO_SECRET: <secret>
+          NODE_ENV: development
+    Metadata:
+      BuildMethod: esbuild
+      BuildProperties:
+        Format: cjs
+        Minify: false
+        Target: "es2020"
+        Sourcemap: true
+        EntryPoints: 
+          - src/serverless.ts
+
+Outputs:
+  WebEndpoint:
+    Description: "API Gateway endpoint URL for Prod stage"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"

@@ -3,7 +3,8 @@ Music streaming accounting app and api
 
 A demonstration
 
-## Requirements:
+#
+# Requirements:
 Receive the data in the form of a json file containing an array of objects with the following fields:
 - artist => Artist Name
 - rate => Payment rate per stream
@@ -18,10 +19,6 @@ Your minimum application requirements include:
 - CRUD services for artists and rates
 - Adding a field to toggle (and persist) whether the artist payout is complete (eg: checkbox)
 
-## Focus
-- Complete solution
-- Try out jss
-
 ## To run:
 Provision a mongodb server. Create a database 'ArtistRoster_development' and a collection 'Artists'. Add index with fields {
   artist:1
@@ -35,6 +32,23 @@ In root directory, run 'npm start'
 To debug react-client, in react-client, run npm run dev. Start on port 3001.
 
 In react-client, run 'npm build'. Have next to package.json a .env file defining PUBLIC_URL
+
+Serverless: this app is designed for totally serverless deployment using
+SAM (Serverless Application Model), which is built on top of CloudFormation.
+Install the AWS CLI.
+Install the AWS SAM CLI.
+
+After an environment has been created in your samconfig.toml file, you can specify it using the --config-env option. sam build --use-container --config-env "prod"
+
+--use-container allows the compiled artifact to be referenced
+by AWS::Serverless::Function
+
+To summarize:
+- cd react-client
+- npm install
+- cd ..
+- sam build
+- sam deploy
 
 ## Dev notes:
 Electing to use a Node runtime to intermediate between a web client and a nosql database.
@@ -116,6 +130,13 @@ Dev questions:
 node run dev gives app crashed. Why do I not see an error and stack at 'app crashed'? And not caught in errorMiddleware?
 Ah, it's logged to src/utils/error/
 
+# Doc links
+ - https://github.com/vendia/serverless-express/tree/mainline/examples/basic-starter-api-gateway-v2-typescript
+ - https://repost.aws/knowledge-center/cloudfront-serve-static-website
+ - https://github.com/aws-samples/amazon-cloudfront-secure-static-site/blob/master/templates/cloudfront-site.yaml
+ - https://github.com/aws-samples/react-cors-spa/blob/main/react-cors-spa-stack.yaml
+ - https://github.com/aws-samples/aws-serverless-ai-stories
+ - 
 
 Copyright 2023 engine99
 
