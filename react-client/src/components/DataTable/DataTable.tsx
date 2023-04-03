@@ -6,6 +6,7 @@ import { NumericFormat } from 'react-number-format';
 const DataTable: FC = () => {
   const [data, setData] = useState([]);
   const [selectedRow, setSelectedRow] = useState<string | null>(null);
+  const [editingRow, setEditingRow] = useState<string | null>(null);
   
   useEffect(() => {
     async function fetchData() {
@@ -42,11 +43,19 @@ const DataTable: FC = () => {
             {row.artist}
           </td>
           <td className='numcol'>
-            <span><NumericFormat value={row.rate*1000} displayType={'text'} thousandSeparator={true} decimalScale={2} fixedDecimalScale /></span>
+            <span className={editingRow !== row._id ? 'editing' : ''}>
+              <NumericFormat value={row.rate*1000} displayType={'text'} thousandSeparator={true} decimalScale={2} fixedDecimalScale />
+            </span>
+            <span className={editingRow === row._id ? 'editing' : ''}>
+              <input type="text" />
+            </span>
           </td>
           <td className='numcol'>
             <span><NumericFormat value={row.streams} displayType={'text'} thousandSeparator={true} decimalScale={0} fixedDecimalScale/></span>
-            <div className={selectedRow === row._id ? 'selected editbutton' : 'editbutton'} >
+            <div 
+              className={selectedRow === row._id ? 'selected editbutton' : 'editbutton'} 
+              onClick={(e)=>{console.log(e)}}
+              >
               Edit
             </div>
           </td>

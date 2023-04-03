@@ -24,7 +24,7 @@
   width: 100%;
   height:40vmin;
   top: calc(40vh - 20vmin); /* given height is 40vmin, this keeps it centered at 40vh */
-  animation: 2s shrink-logo-box 2s linear 1 forwards;
+  animation: 2s shrink-logo-box 2s ease-out 1 forwards;
 }
 
 .headline {
@@ -32,11 +32,11 @@
   position: absolute;
   width: 100%;
   top: 70%;
-  animation: 2s shrink-headline 2s linear 1 forwards;
+  animation: 2s shrink-headline 2s ease-out 1 forwards;
 }
 
 .shrink-header {
-  animation: 2s shrink-header 2s linear 1 forwards;
+  animation: 2s shrink-header 2s ease-out 1 forwards;
 }
 
 
