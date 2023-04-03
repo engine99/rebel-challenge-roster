@@ -51,8 +51,12 @@ tr.selected {
   right: 50px;
 }
 
+.hiding {
+  display: none;
+}
+
 @media (max-width: 600px) {
   .droppable {
-    display:none; 
+    display:none;
   }
 }

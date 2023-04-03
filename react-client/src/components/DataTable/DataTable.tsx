@@ -7,7 +7,7 @@ const DataTable: FC = () => {
   const [data, setData] = useState([]);
   const [selectedRow, setSelectedRow] = useState<string | null>(null);
   const [editingRow, setEditingRow] = useState<string | null>(null);
-  
+
   useEffect(() => {
     async function fetchData() {
       const dest = `${process.env.REACT_APP_ROSTER_API_URL || 'http://localhost:3000'}/artists`
@@ -43,18 +43,18 @@ const DataTable: FC = () => {
             {row.artist}
           </td>
           <td className='numcol'>
-            <span className={editingRow !== row._id ? 'editing' : ''}>
+            <span className={editingRow === row._id ? 'hiding' : ''}>
               <NumericFormat value={row.rate*1000} displayType={'text'} thousandSeparator={true} decimalScale={2} fixedDecimalScale />
             </span>
-            <span className={editingRow === row._id ? 'editing' : ''}>
-              <input type="text" />
+            <span className={editingRow === row._id ? '' : 'hiding'}>
+              <input type="text" value="row.rate"/>
             </span>
           </td>
           <td className='numcol'>
             <span><NumericFormat value={row.streams} displayType={'text'} thousandSeparator={true} decimalScale={0} fixedDecimalScale/></span>
-            <div 
-              className={selectedRow === row._id ? 'selected editbutton' : 'editbutton'} 
-              onClick={(e)=>{console.log(e)}}
+            <div
+              className={selectedRow === row._id ? 'selected editbutton' : 'editbutton'}
+              onClick={(e)=>{console.log(e); setEditingRow(editingRow ? null : row._id)}}
               >
               Edit
             </div>
@@ -70,7 +70,7 @@ const DataTable: FC = () => {
 
   return (
     <div>
-      <table> 
+      <table>
         <thead>{renderHeader()}</thead>
         <tbody>{renderRows()}</tbody>
       </table>
