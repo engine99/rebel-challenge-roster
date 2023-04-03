@@ -46,9 +46,14 @@ by AWS::Serverless::Function
 To summarize:
 - cd react-client
 - npm install
+- copy build\* to s3
+  
 - cd ..
 - sam build
 - sam deploy
+- in Lambda, set value for <mongosecret>
+
+
 
 ## Dev notes:
 Electing to use a Node runtime to intermediate between a web client and a nosql database.
@@ -136,7 +141,8 @@ Ah, it's logged to src/utils/error/
  - https://github.com/aws-samples/amazon-cloudfront-secure-static-site/blob/master/templates/cloudfront-site.yaml
  - https://github.com/aws-samples/react-cors-spa/blob/main/react-cors-spa-stack.yaml
  - https://github.com/aws-samples/aws-serverless-ai-stories
- - 
+ - https://create-react-app.dev/
+
 
 Copyright 2023 engine99
 

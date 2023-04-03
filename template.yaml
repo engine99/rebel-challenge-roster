@@ -23,8 +23,8 @@ Resources:
         Api:
           Type: Api
           Properties:
-            Path: /artists
-            Method: GET
+            Path: /
+            Method: ANY
       Environment:
         Variables:
           MONGO_URL: rebelchallengeartistdat.wqgvu.mongodb.net

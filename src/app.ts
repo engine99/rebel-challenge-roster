@@ -49,7 +49,7 @@ class App {
 
   private initializeMiddlewares() {
     //this.expressApp.use(morgan(LOG_FORMAT, { stream }));
-    this.expressApp.use(cors({ origin: ORIGIN, credentials: CREDENTIALS }));
+    this.expressApp.use(cors({ origin: "*", credentials: false }));
     this.expressApp.use(hpp()); // Query parameter sanitation
     this.expressApp.use(helmet()); // Setting some security-related headers
     this.expressApp.use(express.json());

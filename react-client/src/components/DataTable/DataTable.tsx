@@ -9,7 +9,7 @@ const DataTable: FC = () => {
   
   useEffect(() => {
     async function fetchData() {
-      const dest = `${process.env.REACT_APP_API_URL || 'http://localhost:3000'}/artists`
+      const dest = `${process.env.REACT_APP_ROSTER_API_URL || 'http://localhost:3000'}/artists`
       const response = await fetch(new URL(dest));
       const json = await response.json();
       setData(json);
