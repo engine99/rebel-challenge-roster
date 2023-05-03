@@ -27,7 +27,7 @@ Resources:
             Method: ANY
       Environment:
         Variables:
-          MONGO_URL: rebelchallengeartistdat.wqgvu.mongodb.net
+          MONGO_URL: <url>
           MONGO_SECRET: <secret>
           NODE_ENV: development
     Metadata:

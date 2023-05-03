@@ -3,7 +3,7 @@ version = 0.1
 
 [default]
 [default.global.parameters]
-stack_name = "rebel-challenge-roster-sam"
+stack_name = "serverless-express-react-roster-sam"
 
 [default.build.parameters]
 cached = true
